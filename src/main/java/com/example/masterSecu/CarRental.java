@@ -35,7 +35,7 @@ public class CarRental {
         Car car = null;
         while(iterator.hasNext() && (car=iterator.next()).getPlateNumber().equals(plateNumber)==false){
         }
-        if(iterator.hasNext()){
+        if(car != null){
             return car;
         } else {
             return null;
