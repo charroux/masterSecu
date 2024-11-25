@@ -12,7 +12,17 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
+      - name: Start Kubernetes minikube
+        uses: medyagh/setup-minikube@master
+      - name: Try the Kubernetes cluster
+        run: kubectl get nodes
       - name: Build and test
         run: |
           export SHELL=/bin/bash
           ./gradlew build
+          eval $(minikube docker-env)
+          docker build -t mastersecu .
+      - name: Deploy the image to minikube
+        run:
+          kubectl apply -f deployment.yml
+          kubectl apply -f service.yml

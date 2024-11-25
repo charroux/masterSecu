@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mastersecu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mastersecu
+  template:
+    metadata:
+      labels:
+        app: mastersecu
+    spec:
+      containers:
+        - image: mastersecu:1
+          imagePullPolicy: Never
+          name: mastersecu
+      restartPolicy: Always
+
