@@ -26,3 +26,9 @@ jobs:
         run:
           kubectl apply -f deployment.yml
           kubectl apply -f service.yml
+      - name: Get Kubernetes service URL
+        run: |
+          kubectl get pods
+          kubectl wait --for=condition=Ready --timeout=60s pod -l app=rentalservice
+          kubectl get pods
+          minikube service list
