@@ -28,8 +28,19 @@ minikube docker-env
 eval $(minikube -p minikube docker-env)
 eval $(minikube docker-env)  
 ```
-
-##### Get the access to the Ingress gateway
+# Build Java
+```
+./gradlew build
+```
+# Image Docker
+```
+docker build -f ./Dockerfile -t mastersecu .
+```
+# Deployment
+```
+kubectl apply -f deployment.yml
+```
+# Get the access to the Ingress gateway
 ```
 kubectl -n istio-system port-forward deployment/istio-ingressgateway 31380:8080
 ```
