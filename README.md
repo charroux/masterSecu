@@ -1,5 +1,34 @@
 # masterSecu
 
+## Install Istio
+https://istio.io/latest/docs/setup/getting-started/
+```
+cd istio-1.17.0    
+export PATH=$PWD/bin:$PATH    
+istioctl install --set profile=demo -y
+cd ..   
+```
+Enable auto-injection of the Istio side-cars when the pods are started:
+```
+kubectl label namespace default istio-injection=enabled
+```
+Install the Istio addons (Kiali, Prometheus, Jaeger, Grafana):
+```
+kubectl apply -f samples/addons
+```
+## 
+Enable auto-injection of the Istio side-cars when the pods are started:
+```
+kubectl label namespace default istio-injection=enabled
+```
+
+Configure Docker so that it uses the Kubernetes cluster:
+```
+minikube docker-env
+eval $(minikube -p minikube docker-env)
+eval $(minikube docker-env)  
+```
+
 ## Launch a workflow when the code is updated
 
 Create a new branch:
