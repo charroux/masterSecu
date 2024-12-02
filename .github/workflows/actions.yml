@@ -17,18 +17,24 @@ jobs:
       - name: Try the Kubernetes cluster
         run: kubectl get nodes
       - name: Build and test
+        working-directory: rentalService
         run: |
           export SHELL=/bin/bash
           ./gradlew build
           eval $(minikube docker-env)
-          docker build -t mastersecu .
+          docker build -f ./Dockerfile -t mastersecu .
+          docker images
       - name: Deploy the image to minikube
-        run: |
+        run:
           kubectl apply -f deployment.yml
-          kubectl apply -f service.yml
       - name: Get Kubernetes service URL
         run: |
           kubectl get pods
-          kubectl wait --for=condition=Ready --timeout=60s pod -l app=rentalservice
+          kubectl wait --for=condition=Ready --timeout=60s pod -l app=mastersecu
           kubectl get pods
           minikube service list
+          minikube service mastersecu --url
+          echo "------------------opening the service------------------"
+      - name: Log Kubernetes pods
+        run: |
+          kubectl logs $(kubectl get pods -l app=mastersecu -o name)
