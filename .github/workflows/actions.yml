@@ -23,7 +23,7 @@ jobs:
           eval $(minikube docker-env)
           docker build -t mastersecu .
       - name: Deploy the image to minikube
-        run:
+        run: |
           kubectl apply -f deployment.yml
           kubectl apply -f service.yml
       - name: Get Kubernetes service URL
