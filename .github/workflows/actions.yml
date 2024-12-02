@@ -21,7 +21,7 @@ jobs:
           export SHELL=/bin/bash
           ./gradlew build
           eval $(minikube docker-env)
-          docker build -f ./Dockerfile -t mastersecu
+          docker build -f ./Dockerfile -t mastersecu .
           docker images
       - name: Deploy the image to minikube
         run:
