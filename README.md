@@ -29,6 +29,16 @@ eval $(minikube -p minikube docker-env)
 eval $(minikube docker-env)  
 ```
 
+##### Get the access to the Ingress gateway
+```
+kubectl -n istio-system port-forward deployment/istio-ingressgateway 31380:8080
+```
+
+Get the list of cars to be rented:
+```
+http://localhost:31380/mastersecu/cars
+```
+
 ## Launch a workflow when the code is updated
 
 Create a new branch:
