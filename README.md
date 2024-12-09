@@ -50,6 +50,15 @@ Get the list of cars to be rented:
 http://localhost:31380/mastersecu/cars
 ```
 
+# Manage the cluster with Kiali, Graphana...
+```
+kubectl -n istio-system port-forward deployment/kiali 20001:20001
+```
+
+```
+http://localhost:20001/
+```
+
 ## Launch a workflow when the code is updated
 
 Create a new branch:
